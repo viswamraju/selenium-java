@@ -9,6 +9,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 public class NavigationTest {
 
     WebDriver driver;
@@ -33,6 +35,28 @@ public class NavigationTest {
         WebElement searchButton = driver.findElement(By.className("search-button"));
         searchButton.submit();
         Assert.assertEquals(driver.getTitle(), "Search results for: 'Phones'");
+
+    }
+
+    @Test
+    public void waysToFindElements(){
+        // By linkText
+        WebElement linkWomen = driver.findElement(By.linkText("WOMEN"));
+        linkWomen.click();
+
+        // By partialLinkText
+
+        List<WebElement> linksMen = driver.findElements(By.partialLinkText("MEN"));
+        System.out.println("Links including MEN : " + linksMen.size());
+
+        // By tagnames
+        List<WebElement> tags = driver.findElements(By.tagName("a"));
+        System.out.println("tags of a : " + tags.size());
+
+        tags.stream()
+                .filter(ele -> ele.getText().length() > 0)
+                .forEach(elem -> System.out.println(elem.getText()));
+
 
     }
 
