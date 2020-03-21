@@ -57,6 +57,21 @@ public class NavigationTest {
                 .filter(ele -> ele.getText().length() > 0)
                 .forEach(elem -> System.out.println(elem.getText()));
 
+        // By XPath
+
+        WebElement searchBox =
+                driver.findElement(By.xpath("//*[@id='search']"));
+        searchBox.sendKeys("Bags");
+        searchBox.submit();
+        Assert.assertEquals(driver.getTitle(),"Search results for: 'Bags'");
+
+        // By cssSelector
+
+        WebElement searchBoxCssSelector =
+                driver.findElement(By.cssSelector("#search"));
+        searchBox.sendKeys("Phones");
+        searchBox.submit();
+        Assert.assertEquals(driver.getTitle(), "Search results for: 'Phones'");
 
     }
 
